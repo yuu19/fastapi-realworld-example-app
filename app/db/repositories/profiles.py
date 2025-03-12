@@ -23,6 +23,7 @@ class ProfilesRepository(BaseRepository):
         requested_user: Optional[UserLike],
     ) -> Profile:
         user = await self._users_repo.get_user_by_username(username=username)
+        print("デバッグ user", user)
 
         profile = Profile(username=user.username, bio=user.bio, image=user.image)
         if requested_user:

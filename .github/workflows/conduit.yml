@@ -64,5 +64,5 @@ jobs:
         run: |
           poetry run alembic upgrade head
           poetry run uvicorn app.main:app &
-          APIURL=http://localhost:8000/api ./postman/run-api-tests.sh
+          APIURL=http://localhost:8001/api ./postman/run-api-tests.sh
           poetry run alembic downgrade base

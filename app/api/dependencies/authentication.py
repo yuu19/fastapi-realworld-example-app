@@ -81,6 +81,7 @@ async def _get_current_user(
     settings: AppSettings = Depends(get_app_settings),
 ) -> User:
     try:
+        print("デバッグhoge token", token)
         username = jwt.get_username_from_token(
             token,
             str(settings.secret_key.get_secret_value()),
@@ -105,6 +106,7 @@ async def _get_current_user_optional(
     token: str = Depends(_get_authorization_header_retriever(required=False)),
     settings: AppSettings = Depends(get_app_settings),
 ) -> Optional[User]:
+    print("デバッグ token", token)
     if token:
         return await _get_current_user(repo, token, settings)
 

@@ -2,7 +2,6 @@
 SELECT id,
        username,
        email,
-       salt,
        hashed_password,
        bio,
        image,
@@ -17,7 +16,7 @@ LIMIT 1;
 SELECT id,
        username,
        email,
-       salt,
+    --    salt,
        hashed_password,
        bio,
        image,
@@ -28,9 +27,13 @@ WHERE username = :username
 LIMIT 1;
 
 
--- name: create-new-user<!
-INSERT INTO users (username, email, salt, hashed_password)
-VALUES (:username, :email, :salt, :hashed_password)
+-- -- name: create-new-user<!
+-- INSERT INTO users (username, email, salt, hashed_password)
+-- VALUES (:username, :email, :salt, :hashed_password)
+-- RETURNING
+--     id, created_at, updated_at;
+INSERT INTO users (username, email, hashed_password)
+VALUES (:username, :email, :hashed_password)
 RETURNING
     id, created_at, updated_at;
 
@@ -40,7 +43,7 @@ UPDATE
     users
 SET username        = :new_username,
     email           = :new_email,
-    salt            = :new_salt,
+    -- salt            = :new_salt,
     hashed_password = :new_password,
     bio             = :new_bio,
     image           = :new_image

@@ -41,6 +41,7 @@ async def list_articles(
         offset=articles_filters.offset,
         requested_user=user,
     )
+    print("デバッグ /api/articles", articles)
     articles_for_response = [
         ArticleForResponse.from_orm(article) for article in articles
     ]

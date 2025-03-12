@@ -15,10 +15,12 @@ class UsersRepository(BaseRepository):
         raise EntityDoesNotExist("user with email {0} does not exist".format(email))
 
     async def get_user_by_username(self, *, username: str) -> UserInDB:
+        print("デバッグ username", username)
         user_row = await queries.get_user_by_username(
             self.connection,
             username=username,
         )
+        print("デバッグ user_row", user_row)
         if user_row:
             return UserInDB(**user_row)
 
@@ -41,7 +43,7 @@ class UsersRepository(BaseRepository):
                 self.connection,
                 username=user.username,
                 email=user.email,
-                salt=user.salt,
+                # salt=user.salt,
                 hashed_password=user.hashed_password,
             )
 
@@ -72,7 +74,7 @@ class UsersRepository(BaseRepository):
                 username=user.username,
                 new_username=user_in_db.username,
                 new_email=user_in_db.email,
-                new_salt=user_in_db.salt,
+                # new_salt=user_in_db.salt,
                 new_password=user_in_db.hashed_password,
                 new_bio=user_in_db.bio,
                 new_image=user_in_db.image,

@@ -32,6 +32,7 @@ async def login(
 
     try:
         user = await users_repo.get_user_by_email(email=user_login.email)
+        print("デバッグ", user)
     except EntityDoesNotExist as existence_error:
         raise wrong_login_error from existence_error
 
